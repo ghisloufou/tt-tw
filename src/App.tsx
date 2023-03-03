@@ -1,11 +1,17 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+import Book from './pages/book/Book';
+import Books from './pages/Books';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Navigate to="/books" />} />
+      <Route element={<Home />}>
+        <Route path="books" element={<Books />} />
+        <Route path="books/:bookIsbn" element={<Book />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -13,8 +19,8 @@ export function App() {
 
 export function WrappedApp() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <App />
-    </HashRouter>
+    </BrowserRouter>
   );
 }

@@ -1,0 +1,8 @@
+@font-face {
+  font-family: gameOfThrones;
+  src: url(assets/GameOfThrones.ttf);
+}
+
+.got-font {
+  font-family: gameOfThrones, 'Times New Roman', Times, serif;
+}

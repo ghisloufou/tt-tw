@@ -1,0 +1,33 @@
+.bookshelf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book {
+  color: white;
+  margin: 20px;
+  padding: 10px;
+  background: center url(https://images2.alphacoders.com/126/1260061.jpg);
+  background-size: cover;
+}
+
+.book-summary {
+  border: solid grey 2px;
+  width: 200px;
+  height: 300px;
+  transition: all ease 0.2s;
+  cursor: pointer;
+}
+
+.book-summary:hover {
+  transform: translateY(-10px);
+  border-color: black;
+  color: white;
+}
+
+.book-details {
+  width: 300px;
+  height: 400px;
+  padding: 20px;
+}
