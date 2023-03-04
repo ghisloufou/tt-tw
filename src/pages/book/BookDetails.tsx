@@ -17,15 +17,21 @@ export default function BookDetails({ book }: BookDetailsProps) {
     >
       <h2 className="got-font pt-2">{book.name}</h2>
       <div>
-        Released on {book.released} in {book.country} and published by{' '}
-        {book.publisher}
+        Released on <b>{book.released}</b> in <b>{book.country}</b> and
+        published by <b>{book.publisher}</b>
       </div>
       <br />
-      <div>Written by {book.authors.join(', ')}</div>
+      <div>
+        Written by <b>{book.authors.join(', ')}</b>
+      </div>
       <br />
-      <div>Isbn: {book.isbn}</div>
+      <div>
+        Isbn: <b>{book.isbn}</b>
+      </div>
       <br />
-      <div>{book.numberOfPages} pages</div>
+      <div>
+        <b>{book.numberOfPages}</b> pages
+      </div>
     </div>
   );
 }

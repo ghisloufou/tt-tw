@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Book.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { CharacterModel } from './CharacterModel';
+import Character from './Character';
 
 const fetchCharacter = async (
   characterUrl: string
@@ -17,10 +18,13 @@ export default function CharacterList({
   bookCharacterUrls,
 }: CharacterListProps) {
   const [bookCharacters, setBookCharacters] = useState<CharacterModel[]>([]);
+  const [selectedCharacter, setSelectedCharacter] =
+    useState<CharacterModel | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
+
     const localStorageCharacters = localStorage.getItem('characters');
     const localCharacters: CharacterModel[] = localStorageCharacters
       ? JSON.parse(localStorageCharacters)
@@ -63,30 +67,45 @@ export default function CharacterList({
   }, [bookCharacterUrls]);
 
   return (
-    <section className="d-flex">
+    <section className="d-flex flex-wrap">
       {isLoading ? (
         <h2 className="ms-4">Loading characters...</h2>
       ) : (
         <div className="ms-4">
-          <h5>Characters in the book</h5>
-          <ReactSearchAutocomplete
-            items={bookCharacters.map((character) => {
-              return { ...character, id: character.url };
-            })}
-          />
-          <ul className="characters-list pe-4">
+          <h5 className="text-nowrap">Characters in the book</h5>
+
+          <div className="list-group characters-list">
             {bookCharacters.map((character) => {
               return (
-                <li key={character.url}>
+                <button
+                  key={character.url}
+                  className={`list-group-item list-group-item-action list-group-item-dark text-nowrap ${
+                    selectedCharacter?.url === character.url ? 'active' : ''
+                  }`}
+                  type="button"
+                  onClick={() => setSelectedCharacter(character)}
+                >
                   {character.name !== ''
                     ? character.name
                     : character.aliases[0] ?? 'unknown'}
-                </li>
+                </button>
               );
             })}
-          </ul>
+          </div>
         </div>
       )}
+
+      <div>
+        <ReactSearchAutocomplete
+          items={bookCharacters.map((character) => {
+            return { ...character, id: character.url };
+          })}
+          onSelect={(character) => setSelectedCharacter(character)}
+          styling={{ borderRadius: '5px', height: '40px' }}
+        />
+
+        <Character character={selectedCharacter} />
+      </div>
     </section>
   );
 }

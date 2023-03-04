@@ -45,7 +45,6 @@ function Home() {
 
     if (localCharactersString) {
       const localCharacters = JSON.parse(localCharactersString);
-      console.log('c', localCharacters);
       setCharacters(localCharacters);
     } else {
       fetchCharacters().catch(console.error);

@@ -13,7 +13,7 @@ export default function Book({ book }: BookProps) {
   }
 
   return (
-    <section className="d-flex p-3">
+    <section className="d-flex flex-wrap p-3">
       <BookDetails book={book} />
 
       <CharacterList bookCharacterUrls={book.characters} />
