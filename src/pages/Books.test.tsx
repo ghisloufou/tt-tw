@@ -1,10 +1,10 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { customRender } from '../utils/test/test-utils';
-import { Book } from './BookModel';
+import { BookModel } from './BookModel';
 import Books from './Books';
 
-const bookMocks: Partial<Book>[] = [
+const bookMocks: Partial<BookModel>[] = [
   { name: 'book1', isbn: 'book1' },
   { name: 'book2' },
   { name: 'book3' },

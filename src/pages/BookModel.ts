@@ -1,4 +1,4 @@
-export type Book = {
+export type RawBookModel = {
   url: string;
   name: string;
   isbn: string;
@@ -10,7 +10,12 @@ export type Book = {
   released: string;
   characters: string[];
   povCharacters: string[];
+  lightness: string;
 };
+
+export interface BookModel extends RawBookModel {
+  lightness: string;
+}
 
 // {
 //   url: 'https://anapioficeandfire.com/api/books/1';

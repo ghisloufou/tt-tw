@@ -1,4 +1,4 @@
-export type Character = {
+export type CharacterModel = {
   url: string;
   name: string;
   gender: string;

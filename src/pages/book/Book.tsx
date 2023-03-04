@@ -1,40 +1,22 @@
-import { useContext, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { BooksContext } from '../Home';
+import { BookModel } from '../BookModel';
+import './Book.css';
+import BookDetails from './BookDetails';
+import CharacterList from './CharacterList';
 
-export default function Book() {
-  const params = useParams();
-  const { books } = useContext(BooksContext);
-  const book = books.find(({ isbn }) => isbn === params.bookIsbn);
+type BookProps = {
+  book: BookModel | null;
+};
 
-  useEffect(() => {}, []);
-
+export default function Book({ book }: BookProps) {
   if (!book) {
-    return <div>Book not found</div>;
+    return null;
   }
+
   return (
-    <div>
-      <Link to="/books">Home</Link>
-      <section className="d-flex">
-        <div className="book book-details">
-          <h2 className="got-font pt-2">{book.name}</h2>
-          <div>
-            Released on {book.released} in {book.country} and published by{' '}
-            {book.publisher}
-          </div>
-          <br />
-          <div>Written by {book.authors.join(', ')}</div>
-          <br />
-          <div>Isbn: {params.bookIsbn}</div>
-          <br />
-          <div>{book.numberOfPages} pages</div>
-        </div>
-        <ul className="characters-list">
-          {book.characters.map((character) => {
-            return <li key={character}>{character}</li>;
-          })}
-        </ul>
-      </section>
-    </div>
+    <section className="d-flex p-3">
+      <BookDetails book={book} />
+
+      <CharacterList bookCharacterUrls={book.characters} />
+    </section>
   );
 }
