@@ -10,6 +10,7 @@ export default function LinkToApi({ url }: LinkToApiProps) {
       onClick={() => {
         window.open(url, '_blank')?.focus();
       }}
+      title="Go to the API"
     >
       {url.slice(34)}
     </button>
