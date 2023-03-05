@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import Select from 'react-select';
 import './Book.css';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { CharacterModel } from './CharacterModel';
 import Character from './Character';
+import { CharacterModel } from './CharacterModel';
 
 const fetchCharacter = async (
   characterUrl: string
@@ -67,45 +67,28 @@ export default function CharacterList({
   }, [bookCharacterUrls]);
 
   return (
-    <section className="d-flex flex-wrap">
-      {isLoading ? (
-        <h2 className="ms-4">Loading characters...</h2>
-      ) : (
-        <div className="ms-4">
-          <h5 className="text-nowrap">Characters in the book</h5>
-
-          <div className="list-group characters-list">
-            {bookCharacters.map((character) => {
-              return (
-                <button
-                  key={character.url}
-                  className={`list-group-item list-group-item-action list-group-item-dark text-nowrap ${
-                    selectedCharacter?.url === character.url ? 'active' : ''
-                  }`}
-                  type="button"
-                  onClick={() => setSelectedCharacter(character)}
-                >
-                  {character.name !== ''
+    <>
+      <div className="ms-4 me-4">
+        <h5 className="text-nowrap">Characters in the book</h5>
+        {isLoading ? (
+          <Select placeholder="Loading characters..." />
+        ) : (
+          <Select
+            options={bookCharacters.map((character) => {
+              return {
+                value: character,
+                label:
+                  character.name !== ''
                     ? character.name
-                    : character.aliases[0] ?? 'unknown'}
-                </button>
-              );
+                    : character.aliases[0] ?? 'unknown',
+              };
             })}
-          </div>
-        </div>
-      )}
-
-      <div>
-        <ReactSearchAutocomplete
-          items={bookCharacters.map((character) => {
-            return { ...character, id: character.url };
-          })}
-          onSelect={(character) => setSelectedCharacter(character)}
-          styling={{ borderRadius: '5px', height: '40px' }}
-        />
-
-        <Character character={selectedCharacter} />
+            onChange={(option) => setSelectedCharacter(option?.value ?? null)}
+          />
+        )}
       </div>
-    </section>
+
+      <Character character={selectedCharacter} />
+    </>
   );
 }

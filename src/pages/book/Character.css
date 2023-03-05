@@ -1,0 +1,8 @@
+.character-details {
+  min-width: 350px;
+  padding: 10px;
+  width: 100%;
+  border: solid grey 1px;
+  background: #efefef;
+  flex: 1;
+}

@@ -1,5 +1,4 @@
 import { BookModel } from '../BookModel';
-import './Book.css';
 
 type BookDetailsProps = {
   book: BookModel | null;

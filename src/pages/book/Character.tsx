@@ -1,11 +1,22 @@
-import './Book.css';
+import './Character.css';
 import { CharacterModel } from './CharacterModel';
+import LinkToApi from './LinkToApi';
 
-function getDisplayedValue(value: string | string[]): {
-  displayedValue: string;
+function getDisplayedValue(
+  value: string | string[],
+  key: string
+): {
+  displayedValue: React.ReactNode;
   color: 'black' | 'grey';
 } {
   if (typeof value === 'string' && value !== '') {
+    if (['url', 'spouse', 'father', 'mother'].includes(key)) {
+      return {
+        displayedValue: <LinkToApi url={value} />,
+        color: 'black',
+      };
+    }
+
     return { displayedValue: value, color: 'black' };
   }
 
@@ -14,6 +25,13 @@ function getDisplayedValue(value: string | string[]): {
     (value.length > 1 || value[0] !== '') && // prevent ['']
     value !== ''
   ) {
+    if (['books', 'allegiances', 'povBooks'].includes(key)) {
+      return {
+        displayedValue: value.map((url) => <LinkToApi key={url} url={url} />),
+        color: 'black',
+      };
+    }
+
     return { displayedValue: value.join(', '), color: 'black' };
   }
 
@@ -30,12 +48,18 @@ export default function Character({ character }: CharacterProps) {
   }
 
   return (
-    <div className="ms-4">
+    <div className="character-details">
       {Object.entries(character).map(([key, value]) => {
-        const { displayedValue, color } = getDisplayedValue(value);
+        const { displayedValue, color } = getDisplayedValue(value, key);
         return (
           <div key={key}>
-            <span style={{ width: '100px', display: 'inline-block' }}>
+            <span
+              style={{
+                width: '100px',
+                display: 'inline-block',
+                fontWeight: '500',
+              }}
+            >
               {key[0].toUpperCase() + key.slice(1)}
             </span>
             <span style={{ color }}>{displayedValue}</span>
