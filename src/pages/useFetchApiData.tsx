@@ -21,11 +21,12 @@ export default function useFetchApiData(): {
       const rawBooks = (await data.json()) as RawBookModel[];
 
       const formatedBooks: BookModel[] = rawBooks.map((rawBook) => {
-        const book = rawBook;
-        const releaseDate = new Date(book.released);
-        book.released = releaseDate.toDateString();
-        book.lightness = generateRandomLightness();
-        return book;
+        const releaseDate = new Date(rawBook.released);
+        return {
+          ...rawBook,
+          lightness: generateRandomLightness(),
+          released: releaseDate.toDateString(),
+        };
       });
       localStorage.setItem('books', JSON.stringify(formatedBooks));
       setBooks(formatedBooks);
@@ -33,7 +34,7 @@ export default function useFetchApiData(): {
 
     const localStorageBooks = localStorage.getItem('books');
 
-    if (localStorageBooks) {
+    if (localStorageBooks !== null) {
       const localBooks = JSON.parse(localStorageBooks);
       setBooks(localBooks);
     } else {

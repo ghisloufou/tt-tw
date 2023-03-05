@@ -66,7 +66,7 @@ export default function Characters({ bookCharacterUrls }: CharacterListProps) {
   return (
     <>
       <div className="ms-4 me-4">
-        <h5 className="text-nowrap">Characters in the book</h5>
+        <h5 className="text-nowrap">Characters from the book</h5>
         {isLoading ? (
           <Select placeholder="Loading characters..." />
         ) : (

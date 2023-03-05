@@ -10,7 +10,6 @@ export type RawBookModel = {
   released: string;
   characters: string[];
   povCharacters: string[];
-  lightness: string;
 };
 
 export interface BookModel extends RawBookModel {

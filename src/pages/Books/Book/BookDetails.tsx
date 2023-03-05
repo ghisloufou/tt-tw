@@ -12,7 +12,10 @@ export default function BookDetails({ book }: BookDetailsProps) {
   return (
     <div
       className="book-details"
-      style={{ backgroundColor: `hsl(0, 0%, ${book.lightness}%)` }}
+      style={{
+        backgroundColor: `hsl(0, 0%, ${book.lightness}%)`,
+        position: 'relative',
+      }}
     >
       <h2 className="got-font pt-2">{book.name}</h2>
       <div>
@@ -25,10 +28,13 @@ export default function BookDetails({ book }: BookDetailsProps) {
       </div>
       <br />
       <div>
+        Type of book: <b>{book.mediaType}</b>
+      </div>
+      <div>
         Isbn: <b>{book.isbn}</b>
       </div>
       <br />
-      <div>
+      <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
         <b>{book.numberOfPages}</b> pages
       </div>
     </div>
