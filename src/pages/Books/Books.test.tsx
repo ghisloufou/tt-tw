@@ -1,43 +1,37 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { customRender } from '../../utils/test/test-utils';
 import { BookModel } from './BookModel';
 import Books from './Books';
 
-const bookMocks: Partial<BookModel>[] = [
-  { name: 'book1', isbn: 'book1' },
-  { name: 'book2' },
-  { name: 'book3' },
-];
-
-const handlers = [
-  rest.get('https://anapioficeandfire.com/api/books', (req, res, ctx) => {
-    return res(ctx.json(bookMocks), ctx.delay(150));
-  }),
-];
-const server = setupServer(...handlers);
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+const bookMocks = [
+  { name: 'book1', isbn: 'isbn1' },
+  { name: 'book2', isbn: 'isbn2' },
+  { name: 'book3', isbn: 'isbn3' },
+] as BookModel[];
 
 describe('Books component', () => {
-  it('should display a list of books from GOT API', async () => {
-    const { findByText } = customRender(<Books />);
+  it('should render a list of clickable book names, with the selected book above and change selectedBook on book click', async () => {
+    const setSelectedBookMock = vi.fn();
+    const { findByText, user } = customRender(
+      <Books
+        books={bookMocks}
+        selectedBook={bookMocks[0]}
+        setSelectedBook={setSelectedBookMock}
+      />
+    );
 
-    expect(await findByText('book1')).toBeInTheDocument();
-    expect(await findByText('book2')).toBeInTheDocument();
-    expect(await findByText('book3')).toBeInTheDocument();
-  });
+    const book1 = await findByText('book1');
+    const book2 = await findByText('book2');
+    const book3 = await findByText('book3');
 
-  it('should enable the user to click on a book to open its details', async () => {
-    const { findByText, user } = customRender(<Books />);
+    expect(book1).toBeInTheDocument();
+    expect(book1.parentElement).toHaveClass('selected-book');
 
-    const firstBook = await findByText('book1');
-    expect(firstBook).toBeInTheDocument();
+    expect(book2).toBeInTheDocument();
+    expect(book3).toBeInTheDocument();
 
-    await user.click(firstBook);
+    await user.click(book3);
 
-    expect(firstBook).not.toBeInTheDocument();
+    expect(setSelectedBookMock).toHaveBeenCalledTimes(1);
+    expect(setSelectedBookMock).toHaveBeenNthCalledWith(1, 'isbn3');
   });
 });

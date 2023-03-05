@@ -10,7 +10,7 @@ export type CharacterModel = {
   father: string;
   mother: string;
   spouse: string;
-  allegiances: [];
+  allegiances: string[];
   books: string[];
   povBooks: string[];
   tvSeries: string[];
