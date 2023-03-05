@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 import { customRender } from '../../../../utils/test/test-utils';
 import LinkToApi from './LinkToApi';
 

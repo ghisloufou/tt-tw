@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 import { customRender } from '../../../../utils/test/test-utils';
 import Character from './Character';
 import { CharacterModel } from './CharacterModel';
@@ -29,7 +28,7 @@ describe('Character component', () => {
     expect(details).toBe(null);
   });
 
-  it('should render', async () => {
+  it('should render character details', async () => {
     const { findByText, findByTestId } = customRender(
       <Character character={character} />
     );
