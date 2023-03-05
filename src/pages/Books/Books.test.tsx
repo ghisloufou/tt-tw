@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { customRender } from '../utils/test/test-utils';
+import { customRender } from '../../utils/test/test-utils';
 import { BookModel } from './BookModel';
 import Books from './Books';
 

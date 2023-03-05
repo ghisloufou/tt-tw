@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import './Book.css';
 import Character from './Character';
 import { CharacterModel } from './CharacterModel';
 
@@ -14,9 +13,7 @@ type CharacterListProps = {
   bookCharacterUrls: string[];
 };
 
-export default function CharacterList({
-  bookCharacterUrls,
-}: CharacterListProps) {
+export default function Characters({ bookCharacterUrls }: CharacterListProps) {
   const [bookCharacters, setBookCharacters] = useState<CharacterModel[]>([]);
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterModel | null>(null);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Book from './book/Book';
-import { CharacterModel } from './book/CharacterModel';
-import { BookModel, RawBookModel } from './BookModel';
-import Books from './Books';
+import Book from './Books/Book/Book';
+import { CharacterModel } from './Books/Book/Characters/CharacterModel';
+import { BookModel, RawBookModel } from './Books/BookModel';
+import Books from './Books/Books';
 
 function generateRandomLightness(): string {
   const min = 10;

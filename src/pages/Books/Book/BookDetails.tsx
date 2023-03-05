@@ -1,4 +1,4 @@
-import { BookModel } from '../BookModel';
+import { BookModel } from '../Books/BookModel';
 
 type BookDetailsProps = {
   book: BookModel | null;
