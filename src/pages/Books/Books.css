@@ -1,0 +1,39 @@
+.books-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bookshelf {
+  flex-wrap: wrap;
+  width: fit-content;
+  justify-content: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 30px 15px 0px 15px;
+  border-radius: 2px;
+  border: solid rgb(32, 15, 6) 7px;
+  box-shadow: inset 0 0 20px 0 grey;
+}
+
+.vertical-book {
+  color: white;
+  width: 80px;
+  height: fit-content;
+  padding: 40px 20px;
+  margin: 2px;
+  border: none;
+  border-radius: 3px;
+  align-items: start;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+.vertical-book:hover,
+.selected-book {
+  transform: translateY(-13px);
+}
+
+.vertical-book span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}

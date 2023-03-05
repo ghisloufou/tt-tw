@@ -1,0 +1,21 @@
+@font-face {
+  font-family: gameOfThrones;
+  src: url(assets/GameOfThrones.ttf);
+}
+
+.got-font {
+  font-family: gameOfThrones, 'Times New Roman', Times, serif;
+}
+
+body {
+  background: rgb(208, 208, 208);
+  background: linear-gradient(
+    20deg,
+    rgba(208, 208, 208, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+html {
+  min-height: 100%;
+}

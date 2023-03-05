@@ -12,9 +12,10 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.0"
+    "react-select": "^5.7.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.20.0",
@@ -37,6 +38,7 @@
     "eslint-plugin-react": "^7.32.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^21.1.0",
+    "msw": "^1.1.0",
     "prettier": "^2.8.3",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",

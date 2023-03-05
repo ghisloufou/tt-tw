@@ -1,0 +1,13 @@
+.book-details {
+  color: white;
+  width: 320px;
+  min-width: 320px;
+  height: 450px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.characters-list {
+  max-height: 420px;
+  overflow: auto;
+}
