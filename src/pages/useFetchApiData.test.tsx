@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { renderHook, waitFor } from '../utils/test/test-utils';
 import { BookModel } from './Books/BookModel';
-import useFetchApiData from './useFetchApiData';
+import useBooks from './useBooks';
 
 const date = '1996-08-01T00:00:00';
 const expectedDate = 'Thu Aug 01 1996';
@@ -39,11 +39,11 @@ describe('useFetchApiData hook', () => {
 
     vi.spyOn(Math, 'random').mockImplementation(() => 1);
 
-    const { result } = renderHook(() => useFetchApiData());
+    const { result } = renderHook(() => useBooks());
 
     await waitFor(() => {
       expect(result.current.books).toEqual(expectedBooks);
-      expect(result.current.selectedBook).toEqual(null);
+      expect(result.current.selectedBookIsbn).toEqual(null);
 
       const bookStorage = localStorage.getItem('books');
 
@@ -64,11 +64,11 @@ describe('useFetchApiData hook', () => {
 
     const setItemSpy = vi.spyOn(localStorage, 'setItem');
 
-    const { result } = renderHook(() => useFetchApiData());
+    const { result } = renderHook(() => useBooks());
 
     await waitFor(() => {
       expect(result.current.books).toEqual(expectedBooks);
-      expect(result.current.selectedBook).toEqual(null);
+      expect(result.current.selectedBookIsbn).toEqual(null);
 
       expect(setItemSpy).not.toHaveBeenCalled();
     });

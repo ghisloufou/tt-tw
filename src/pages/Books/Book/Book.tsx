@@ -4,7 +4,7 @@ import BookDetails from './BookDetails';
 import Characters from './Characters/Characters';
 
 type BookProps = {
-  book: BookModel | null;
+  book: BookModel | undefined;
 };
 
 export default function Book({ book }: BookProps) {

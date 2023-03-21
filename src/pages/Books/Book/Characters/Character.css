@@ -6,3 +6,9 @@
   background: #efefef;
   flex: 1;
 }
+
+.character-data {
+  width: '100px';
+  display: 'inline-block';
+  font-weight: '500';
+}
