@@ -7,8 +7,8 @@
   flex: 1;
 }
 
-.character-data {
-  width: '100px';
-  display: 'inline-block';
-  font-weight: '500';
+.character-data > span:first-child {
+  width: 100px;
+  display: inline-block;
+  font-weight: 500;
 }

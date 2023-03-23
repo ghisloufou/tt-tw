@@ -23,6 +23,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {

@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react';
+import { ArrayCharacterData } from './ArrayCharacterData';
 import './Character.css';
 import { CharacterModel } from './CharacterModel';
-import LinkToApi from './LinkToApi';
+import { LinkedArrayCharacterData } from './LinkedArrayCharacterData';
+import { StringCharacterData } from './StringCharacterData';
 
 type CharacterProps = {
   character: CharacterModel | null;
-};
-
-type DisplayedCharacterModel = {
-  key: string;
-  formattedValue: React.ReactNode;
-  color: 'black' | 'grey';
 };
 
 export default function Character({ character }: CharacterProps) {
@@ -20,39 +15,36 @@ export default function Character({ character }: CharacterProps) {
 
   return (
     <div className="character-details" data-testid="character-details">
-      <div>
-        <span className="character-data">Name:</span>
-        <span>{character.name}</span>
-      </div>
-
-      {/*  TODO: Add all character details (in dedicated components) */}
+      <StringCharacterData label="Name:" value={character.name} />
+      <StringCharacterData label="Gender:" value={character.gender} />
+      <ArrayCharacterData label="Aliases:" values={character.aliases} />
+      <LinkedArrayCharacterData
+        label="Allegiances:"
+        values={character.allegiances}
+      />
+      <LinkedArrayCharacterData label="Books:" values={character.books} />
+      <ArrayCharacterData label="Titles:" values={character.titles} />
+      <StringCharacterData
+        label="Father:"
+        value={character.father}
+        isUrlValue
+      />
+      <StringCharacterData
+        label="Mother:"
+        value={character.mother}
+        isUrlValue
+      />
+      <StringCharacterData
+        label="Spouse:"
+        value={character.spouse}
+        isUrlValue
+      />
+      <StringCharacterData label="Birth date:" value={character.born} />
+      <StringCharacterData label="Death date:" value={character.died} />
+      <StringCharacterData label="Culture:" value={character.culture} />
+      <ArrayCharacterData label="Actors:" values={character.playedBy} />
+      <ArrayCharacterData label="Pov Books:" values={character.povBooks} />
+      <ArrayCharacterData label="TV Series:" values={character.tvSeries} />
     </div>
   );
 }
-
-// function getFormattedValue(
-//   value: string | string[],
-//   key: string
-// ): React.ReactNode {
-//   if (typeof value === 'string' && value !== '') {
-//     if (['url', 'spouse', 'father', 'mother'].includes(key)) {
-//       return <LinkToApi url={value} />;
-//     }
-
-//     return value;
-//   }
-
-//   if (
-//     value.length > 0 && // prevent empty array
-//     (value.length > 1 || value[0] !== '') && // prevent ['']
-//     value !== ''
-//   ) {
-//     if (['books', 'allegiances', 'povBooks'].includes(key)) {
-//       return value.map((url) => <LinkToApi key={url} url={url} />);
-//     }
-
-//     return value.join(', ');
-//   }
-
-//   return 'n/a';
-// }
