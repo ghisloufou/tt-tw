@@ -3,13 +3,13 @@ import './Books.css';
 
 type BooksProps = {
   books: BookModel[];
-  selectedBook: BookModel | null;
+  selectedBookIsbn: string | undefined;
   setSelectedBook: (isbn: string) => void;
 };
 
 export default function Books({
   books,
-  selectedBook,
+  selectedBookIsbn,
   setSelectedBook,
 }: BooksProps) {
   return (
@@ -19,7 +19,7 @@ export default function Books({
           <button
             title={book.name}
             className={`vertical-book got-font ${
-              selectedBook?.isbn === book.isbn ? 'selected-book' : ''
+              selectedBookIsbn === book.isbn ? 'selected-book' : ''
             }`}
             type="button"
             key={book.isbn}

@@ -4,7 +4,7 @@ import BookDetails from './BookDetails';
 import Characters from './Characters/Characters';
 
 type BookProps = {
-  book: BookModel | null;
+  book: BookModel | undefined;
 };
 
 export default function Book({ book }: BookProps) {
@@ -15,8 +15,7 @@ export default function Book({ book }: BookProps) {
   return (
     <section className="d-flex flex-wrap p-3">
       <BookDetails book={book} />
-
-      <Characters bookCharacterUrls={book.characters} />
+      <Characters key={book.isbn} bookCharacterUrls={book.characters} />
     </section>
   );
 }

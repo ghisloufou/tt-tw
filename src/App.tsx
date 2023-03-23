@@ -1,18 +1,20 @@
 import Book from './pages/Books/Book/Book';
 import Books from './pages/Books/Books';
-import useFetchApiData from './pages/useFetchApiData';
+import useBooks from './pages/useBooks';
 
 export default function App() {
-  const { books, updateSelectedBook, selectedBook } = useFetchApiData();
+  const { books, updateSelectedBook, selectedBookIsbn, error } = useBooks();
+  const selectedBook = books.find((book) => book.isbn === selectedBookIsbn);
 
   return (
     <section>
       <h1 className="text-center got-font py-4">Game Of Thrones Bookshelf</h1>
+      {error && <h3>{error}</h3>}
       <div className="books-container">
         <Books
           books={books}
           setSelectedBook={(isbn) => updateSelectedBook(isbn)}
-          selectedBook={selectedBook}
+          selectedBookIsbn={selectedBookIsbn}
         />
       </div>
       <Book book={selectedBook} />

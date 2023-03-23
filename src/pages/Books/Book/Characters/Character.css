@@ -6,3 +6,9 @@
   background: #efefef;
   flex: 1;
 }
+
+.character-data > span:first-child {
+  width: 100px;
+  display: inline-block;
+  font-weight: 500;
+}
