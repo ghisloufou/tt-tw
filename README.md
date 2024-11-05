@@ -1,10 +1,11 @@
 ### Test technique
+
 Créer une application qui permet de visualiser les personnages de Game of Thrones.
 
-Lancer 
+Lancer
 
-`npm install` 
+`npm install`
 
-puis 
+puis
 
 `npm run start`
