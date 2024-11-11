@@ -22,7 +22,9 @@ const character = {
 
 describe('Character component', () => {
   it('should not render when character is null', () => {
-    const { queryByTestId } = customRender(<Character character={null} />);
+    const { queryByTestId } = customRender(
+      <Character character={null} handleClose={() => {}} />
+    );
 
     const details = queryByTestId('character-details');
     expect(details).toBe(null);
@@ -30,7 +32,7 @@ describe('Character component', () => {
 
   it('should render character details', async () => {
     const { findByText, findByTestId } = customRender(
-      <Character character={character} />
+      <Character character={character} handleClose={() => {}} />
     );
 
     const details = await findByTestId('character-details');

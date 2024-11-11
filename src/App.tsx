@@ -1,23 +1,17 @@
-import Book from './pages/Books/Book/Book';
-import Books from './pages/Books/Books';
-import useBooks from './pages/useBooks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { Bookshelf } from './pages/Bookshelf';
 
-export default function App() {
-  const { books, updateSelectedBook, selectedBookIsbn, error } = useBooks();
-  const selectedBook = books.find((book) => book.isbn === selectedBookIsbn);
+const queryClient = new QueryClient();
 
-  return (
-    <section>
-      <h1 className="text-center got-font py-4">Game Of Thrones Bookshelf</h1>
-      {error && <h3>{error}</h3>}
-      <div className="books-container">
-        <Books
-          books={books}
-          setSelectedBook={(isbn) => updateSelectedBook(isbn)}
-          selectedBookIsbn={selectedBookIsbn}
-        />
-      </div>
-      <Book book={selectedBook} />
-    </section>
-  );
-}
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <Bookshelf />
+    </QueryClientProvider>
+  </React.StrictMode>
+);

@@ -14,8 +14,8 @@ describe('Books component', () => {
     const { findByText, user } = customRender(
       <Books
         books={bookMocks}
-        selectedBookIsbn={bookMocks[0]}
-        setSelectedBook={setSelectedBookMock}
+        selectedBookIsbn={bookMocks[0].isbn}
+        handleBookSelection={setSelectedBookMock}
       />
     );
 

@@ -4,16 +4,20 @@ import './Books.css';
 type BooksProps = {
   books: BookModel[];
   selectedBookIsbn: string | undefined;
-  setSelectedBook: (isbn: string) => void;
+  handleBookSelection: (isbn: string) => void;
 };
 
 export default function Books({
   books,
   selectedBookIsbn,
-  setSelectedBook,
+  handleBookSelection,
 }: BooksProps) {
   return (
-    <section className="bookshelf mb-5">
+    <section
+      className={`bookshelf ${
+        selectedBookIsbn !== undefined && 'tiny-bookshelf'
+      }`}
+    >
       {books.map((book) => {
         return (
           <button
@@ -23,7 +27,7 @@ export default function Books({
             }`}
             type="button"
             key={book.isbn}
-            onClick={() => setSelectedBook(book.isbn)}
+            onClick={() => handleBookSelection(book.isbn)}
             style={{
               backgroundColor: `hsl(0, 0%, ${book.lightness}%)`,
             }}

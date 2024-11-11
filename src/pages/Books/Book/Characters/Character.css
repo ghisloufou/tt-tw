@@ -1,4 +1,6 @@
 .character-details {
+  max-width: fit-content;
+  position: relative;
   min-width: 350px;
   padding: 10px;
   width: 100%;

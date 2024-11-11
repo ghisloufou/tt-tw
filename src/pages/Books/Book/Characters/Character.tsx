@@ -6,15 +6,24 @@ import { StringCharacterData } from './StringCharacterData';
 
 type CharacterProps = {
   character: CharacterModel | null;
+  handleClose: () => void;
 };
 
-export default function Character({ character }: CharacterProps) {
+export default function Character({ character, handleClose }: CharacterProps) {
   if (!character) {
     return null;
   }
 
   return (
     <div className="character-details" data-testid="character-details">
+      <button
+        type="button"
+        className="position-absolute top-0 end-0 btn btn-sm"
+        onClick={handleClose}
+      >
+        close
+      </button>
+
       <StringCharacterData label="Name:" value={character.name} />
       <StringCharacterData label="Gender:" value={character.gender} />
       <ArrayCharacterData label="Aliases:" values={character.aliases} />

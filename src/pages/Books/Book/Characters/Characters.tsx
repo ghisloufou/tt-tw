@@ -1,91 +1,87 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
+import { useQueries } from '@tanstack/react-query';
 import Character from './Character';
 import { CharacterModel } from './CharacterModel';
 
 const fetchCharacter = async (
   characterUrl: string
 ): Promise<CharacterModel> => {
-  return fetch(characterUrl).then((response) => response.json());
+  const response = await fetch(characterUrl);
+  if (!response.ok) {
+    throw new Error('Could not fetch character');
+  }
+
+  return response.json();
 };
 
 type CharacterListProps = {
-  bookCharacterUrls: string[];
+  bookCharacterUrls: string[] | undefined;
 };
 
 export default function Characters({ bookCharacterUrls }: CharacterListProps) {
-  const [bookCharacters, setBookCharacters] = useState<CharacterModel[]>([]);
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterModel | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
+  const { data, isLoading, isError } = useQueries({
+    queries: (bookCharacterUrls ?? []).map((url) => ({
+      queryKey: ['character', url],
+      queryFn: () => fetchCharacter(url),
+      staleTime: Infinity,
+    })),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        isLoading: results.some((result) => result.isLoading),
+        isError: results.some((result) => result.isError),
+      };
+    },
+  });
 
-    const localStorageCharacters = localStorage.getItem('characters');
-    const localCharacters: CharacterModel[] = localStorageCharacters
-      ? JSON.parse(localStorageCharacters)
-      : [];
-    const newlyFetchedCharacters: CharacterModel[] = [];
+  function handleCharacterChange(
+    newSelectedCharacter: CharacterModel | undefined
+  ) {
+    setSelectedCharacter(newSelectedCharacter ?? null);
+  }
 
-    const getLocalOrFetchCharacters = async () => {
-      const charactersPromises = bookCharacterUrls.map(async (characterUrl) => {
-        const localCharacter = localCharacters.find(
-          ({ url }) => url === characterUrl
-        );
-        if (localCharacter !== undefined) {
-          return localCharacter;
-        }
+  if (!bookCharacterUrls) {
+    return null;
+  }
 
-        const newCharacter = await fetchCharacter(characterUrl);
-        newlyFetchedCharacters.push(newCharacter);
-        return newCharacter;
-      });
+  if (isError) {
+    return <div>Failed to load characters</div>;
+  }
 
-      const retreivedCharacters = await Promise.all(charactersPromises);
-
-      if (newlyFetchedCharacters.length) {
-        localStorage.setItem(
-          'characters',
-          JSON.stringify(localCharacters.concat(newlyFetchedCharacters))
-        );
-      }
-
-      setBookCharacters(retreivedCharacters);
+  const charactersOptions = data.map((character) => {
+    return {
+      value: character,
+      label:
+        character?.name !== ''
+          ? character?.name
+          : character.aliases[0] ?? 'unknown',
     };
-
-    getLocalOrFetchCharacters()
-      .then(() => setIsLoading(false))
-      .catch((error) => {
-        setIsLoading(false);
-        console.error(error);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookCharacterUrls]);
+  });
 
   return (
     <>
-      <div className="ms-4 me-4">
+      <div>
         <h5 className="text-nowrap">Characters from the book</h5>
         {isLoading ? (
           <Select placeholder="Loading characters..." />
         ) : (
           <Select
-            options={bookCharacters.map((character) => {
-              return {
-                value: character,
-                label:
-                  character.name !== ''
-                    ? character.name
-                    : character.aliases[0] ?? 'unknown',
-              };
-            })}
-            onChange={(option) => setSelectedCharacter(option?.value ?? null)}
+            options={charactersOptions}
+            onChange={(option) => handleCharacterChange(option?.value)}
           />
         )}
       </div>
 
-      <Character character={selectedCharacter} />
+      <Character
+        character={selectedCharacter}
+        handleClose={() => {
+          setSelectedCharacter(null);
+        }}
+      />
     </>
   );
 }
