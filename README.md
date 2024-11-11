@@ -1,11 +1,31 @@
-### Test technique
+## React Game Of Thrones Bookshelf
 
-Créer une application qui permet de visualiser les personnages de Game of Thrones.
+Objective was from a technical test to build a Game of thrones bookshelf based on the following api:
+https://anapioficeandfire.com/
 
-Lancer
+### Start the app
 
-`npm install`
+run:
 
-puis
+``` shell
+npm install
+```
 
-`npm run start`
+then
+
+``` shell
+npm run start
+```
+
+or with pnpm:  
+
+``` shell
+pnpm install
+```
+
+
+then
+
+``` shell
+pnpm start
+```
