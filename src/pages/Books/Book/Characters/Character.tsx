@@ -9,7 +9,7 @@ type CharacterProps = {
   handleClose: () => void;
 };
 
-export default function Character({ character, handleClose }: CharacterProps) {
+export function Character({ character, handleClose }: CharacterProps) {
   if (!character) {
     return null;
   }

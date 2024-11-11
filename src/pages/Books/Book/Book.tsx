@@ -5,7 +5,7 @@ type BookProps = {
   book: BookModel | undefined;
 };
 
-export default function Book({ book }: BookProps) {
+export function Book({ book }: BookProps) {
   if (!book) {
     return null;
   }

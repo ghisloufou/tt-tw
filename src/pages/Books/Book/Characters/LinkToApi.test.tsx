@@ -1,5 +1,5 @@
 import { customRender } from '../../../../utils/test/test-utils';
-import LinkToApi from './LinkToApi';
+import { LinkToApi } from './LinkToApi';
 
 const url = 'https://anapioficeandfire.com/api/characters/12';
 

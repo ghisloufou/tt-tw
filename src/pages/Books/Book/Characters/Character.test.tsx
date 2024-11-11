@@ -1,5 +1,5 @@
 import { customRender } from '../../../../utils/test/test-utils';
-import Character from './Character';
+import { Character } from './Character';
 import { CharacterModel } from './CharacterModel';
 
 const character = {

@@ -1,6 +1,6 @@
 import { customRender } from '../../utils/test/test-utils';
 import { BookModel } from './BookModel';
-import Books from './Books';
+import { Books } from './Books';
 
 const bookMocks = [
   { name: 'book1', isbn: 'isbn1' },

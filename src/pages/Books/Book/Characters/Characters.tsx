@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Select from 'react-select';
 import { useQueries } from '@tanstack/react-query';
-import Character from './Character';
+import { Character } from './Character';
 import { CharacterModel } from './CharacterModel';
 
 const fetchCharacter = async (
@@ -19,7 +19,7 @@ type CharacterListProps = {
   bookCharacterUrls: string[] | undefined;
 };
 
-export default function Characters({ bookCharacterUrls }: CharacterListProps) {
+export function Characters({ bookCharacterUrls }: CharacterListProps) {
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterModel | null>(null);
 

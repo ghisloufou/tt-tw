@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import Book from './Books/Book/Book';
-import Books from './Books/Books';
+import { Book } from './Books/Book/Book';
+import { Books } from './Books/Books';
 import { fetchBooks } from '../business/fetchBooks';
-import Characters from './Books/Book/Characters/Characters';
+import { Characters } from './Books/Book/Characters/Characters';
 
 export function Bookshelf() {
   const query = useQuery({

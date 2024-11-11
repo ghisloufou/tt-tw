@@ -2,7 +2,7 @@ interface LinkToApiProps {
   url: string;
 }
 
-export default function LinkToApi({ url }: LinkToApiProps) {
+export function LinkToApi({ url }: LinkToApiProps) {
   return (
     <button
       className="badge text-bg-secondary btn me-1"

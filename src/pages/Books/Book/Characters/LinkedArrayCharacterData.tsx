@@ -1,4 +1,4 @@
-import LinkToApi from './LinkToApi';
+import { LinkToApi } from './LinkToApi';
 
 export function LinkedArrayCharacterData({
   label,

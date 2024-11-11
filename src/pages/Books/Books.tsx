@@ -7,7 +7,7 @@ type BooksProps = {
   handleBookSelection: (isbn: string) => void;
 };
 
-export default function Books({
+export function Books({
   books,
   selectedBookIsbn,
   handleBookSelection,
