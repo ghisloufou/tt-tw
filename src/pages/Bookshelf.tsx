@@ -34,16 +34,19 @@ export function Bookshelf() {
           Game Of Thrones Bookshelf
         </button>
       </h1>
-
       <div className="d-flex justify-content-center gap-3">
-        <Books
-          books={query.data}
-          handleBookSelection={setSelectedBookIsbn}
-          selectedBookIsbn={selectedBookIsbn}
-        />
+        <div>
+          <Books
+            books={query.data}
+            handleBookSelection={setSelectedBookIsbn}
+            selectedBookIsbn={selectedBookIsbn}
+          />
+          {selectedBookIsbn === undefined && (
+            <span className="ms-3 fw-bold">Choose a book!</span>
+          )}
+        </div>
 
         <Book book={selectedBook} />
-
         <Characters
           key={selectedBook?.isbn}
           bookCharacterUrls={selectedBook?.characters}
